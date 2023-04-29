@@ -6,7 +6,9 @@ using Microsoft.IdentityModel.Tokens;
 using PentaGOL.Api.Extensions;
 using PentaGOL.Api.Models;
 using PentaGOL.DAL.Contexts;
+using PentaGOL.Service.Interfaces;
 using PentaGOL.Service.Mappers;
+using PentaGOL.Service.Services;
 using Serilog;
 using System.Text;
 
@@ -33,6 +35,7 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddCustomServices();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -53,6 +56,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+
 // Serilog
 var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
@@ -61,7 +65,6 @@ var logger = new LoggerConfiguration()
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 
-builder.Services.AddCustomServices();
 
 
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using PentaGOL.Service.Exceptions;
+using PentaGOL.Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PentaGOL.Service.Services;
 
-public class AuthService
+public class AuthService : IAuthService
 {
     private readonly IConfiguration configuration;
 
