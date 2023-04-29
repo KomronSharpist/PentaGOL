@@ -391,7 +391,7 @@ export const Home = () => {
   Italiya. Seriya A4</button>
 <button style={state1 === "vv" ? {backgroundColor:"#469264", color:"#FFF", padding:"10px" , borderRadius:"8px"} : {}} onClick={() => setState1("vv")}>
 <img src={teamLogo2} alt={teamLogo} />
-  Italiya. Seriya A5</button>
+  Italiya. Sjygyjgeriya A5</button>
 </div>
 <div>
   {state1 === "aa" ? (
