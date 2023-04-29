@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace PentaGOL.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
@@ -18,15 +18,17 @@ public class WeatherForecastController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    //[HttpGet]
+    //public IActionResult User()
+    //{
+    //    return Ok("Salom");
+    //}
+    [HttpPost(Name = "GetWeatherForecast")]
+    public IActionResult Get([FromBody] DateTime dateTime)
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-        .ToArray();
+        string formattedDateTime = dateTime.ToString("dd.MM.yyyy HH:mm");
+
+        // Return a response with the formatted datetime
+        return Ok(formattedDateTime);
     }
 }
