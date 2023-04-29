@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿//using Microsoft.AspNetCore.Mvc;
 
-namespace PentaGOL.Api.Controllers;
+//namespace PentaGOL.Api.Controllers;
 
-public class TeamController : BaseController
-{
-    public IActionResult Index()
-    {
-        return View();
-    }
-}
+//public class TeamController : BaseController
+//{
+//    public IActionResult Index()
+//    {
+//        return View();
+//    }
+//}

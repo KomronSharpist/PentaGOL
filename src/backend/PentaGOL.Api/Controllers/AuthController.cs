@@ -4,8 +4,9 @@ namespace PentaGOL.Api.Controllers;
 
 public class AuthController : BaseController
 {
-    public IActionResult Index()
+    [HttpGet(Name = "GetUser")]
+    public IActionResult GetUser(string username)
     {
-        return View();
+        return Ok(username);
     }
 }
