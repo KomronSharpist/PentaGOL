@@ -12,9 +12,9 @@ function App() {
     <>
       <Header></Header>
       <Routes>
-        <Route path="/" element={<Home></Home>}> </Route>
-        <Route path="/article" element={<Article></Article>}/>
-        <Route path="/admin" element={<Admin></Admin>}/>
+        <Route path="/" element={<Home/>}> </Route>
+        <Route path="/article" element={<Article/>}/>
+        <Route path="/admin" element={<Admin/>}/>
         <Route path="*" element={<h1>page yo'q</h1>}/>
       </Routes>
       <Footer></Footer>
@@ -24,3 +24,4 @@ function App() {
 }
 
 export default App;
+//* Test comment
