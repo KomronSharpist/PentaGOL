@@ -1,0 +1,5 @@
+﻿namespace PentaGOL.Shared;
+public class Class1
+{
+
+}
