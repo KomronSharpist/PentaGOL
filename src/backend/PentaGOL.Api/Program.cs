@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PentaGOL.Api.Extensions;
+using PentaGOL.Api.Middlewares;
 using PentaGOL.Api.Models;
 using PentaGOL.DAL.Contexts;
 using PentaGOL.Service.Interfaces;

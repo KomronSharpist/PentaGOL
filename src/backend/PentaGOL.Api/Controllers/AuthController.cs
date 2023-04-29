@@ -1,12 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PentaGOL.Service.Interfaces;
 
 namespace PentaGOL.Api.Controllers;
 
 public class AuthController : BaseController
 {
-    [HttpGet(Name = "GetUser")]
-    public IActionResult GetUser(string username)
+    private readonly IAuthService authService;
+
+    public AuthController(IAuthService authService)
     {
-        return Ok(username);
+        this.authService = authService;
+    }
+    [HttpPost("authenticate")]
+    public async Task<IActionResult> AuthenticateAsync(string email, string password)
+    {
+        return Ok(await this.authService.AuthenticateAsync(email, password));
     }
 }

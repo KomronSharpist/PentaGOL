@@ -22,12 +22,12 @@ namespace PentaGOL.Api.Extensions
             services.AddScoped<IAuthService, AuthService>();
 
 
-            services.AddControllers();
-            services.AddProblemDetails();
-            services.AddExceptionHandler(options =>
-            {
-                options.ExceptionHandlingPath = "/api/error";
-            });
+            //services.AddControllers();
+            //services.AddProblemDetails();
+            //services.AddExceptionHandler(options =>
+            //{
+            //    options.ExceptionHandlingPath = "/api/error";
+            //});
         }
     }
 }

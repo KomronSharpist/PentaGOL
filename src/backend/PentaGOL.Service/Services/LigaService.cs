@@ -26,8 +26,8 @@ public class LigaService : ILigaService
     }
     public async Task<LigaForResultDto> CreateAsync(LigaForCreationDto dto)
     {
-        var CheckForExits = this.unitOfWork.Ligas.SelectAll().FirstOrDefaultAsync(l => l.Name.Equals(dto.Name));
-        if(CheckForExits is not null)
+        var CheckForExits = this.unitOfWork.Ligas.SelectAsync(l => l.Name.Equals(dto.Name));
+        if(CheckForExits.Result is not null)
             throw new PentaGolExceptions(409, "Liga is already exist");
 
         var mappedDto = this.mapper.Map<Liga>(dto);
