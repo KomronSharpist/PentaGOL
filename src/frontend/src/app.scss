@@ -107,3 +107,35 @@ body{
 button{
   border: none;
 }
+
+.admin_page {
+  display: flex;
+  .page_name{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    button {
+      padding: 10px 20px;
+      background-color: green;
+      color: #fff;
+      border-radius: 10px;
+      transition: all .3s;
+      &:hover{
+        background-color: rgb(40, 178, 40);
+      }
+    }
+  }
+  .page_table{
+    width: 100%;
+    th, td {
+      border: 1px solid #000;
+      width: auto;
+      padding: 10px;
+    }
+  }
+}
+.admin_workspace{
+  padding: 40px;
+  width: 100%;
+}

@@ -1,4 +1,6 @@
 import { Home } from "./pages/home/home";
+import AdminNews from "./pages/admin_news/admin_news"
+import AdminTeams from "./pages/admin_teams/admin_teams"
 import { Header } from "./components/header/header";
 import { Footer } from "./components/footer/footer";
 import { Article } from "./pages/article/article";
@@ -14,7 +16,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home></Home>}> </Route>
         <Route path="/article/:id" element={<Article></Article>}/>
-        <Route path="/admin" element={<Admin></Admin>}/>
+        <Route path="/admin" element={<Admin/>}/>
+        <Route path="/admin/news" element={<AdminNews/>}/>
+        <Route path="/admin/teams" element={<AdminTeams/>}/>
+        <Route path="/admin/matches" element={<Admin/>}/>
+        <Route path="/admin/ligas" element={<Admin/>}/>
         <Route path="*" element={<h1>page yo'q</h1>}/>
       </Routes>
       <Footer></Footer>
