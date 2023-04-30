@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+	  <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.30.0" />
   </ItemGroup>
@@ -15,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PentaGOL.DAL\PentaGOL.DAL.csproj" />
     <ProjectReference Include="..\PentaGOL.Domain\PentaGOL.Domain.csproj" />
+    <ProjectReference Include="..\PentaGOL.Shared\PentaGOL.Shared.csproj" />
   </ItemGroup>
 
 </Project>

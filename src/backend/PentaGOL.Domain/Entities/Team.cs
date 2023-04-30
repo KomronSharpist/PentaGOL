@@ -10,8 +10,8 @@ namespace PentaGOL.Domain.Entities;
 public class Team : Auditable
 {
     public string Name { get; set; }
-    public string ImagePath { get; set; }
+    public string ImagePath { get; set; } = "https://mtbdata.com/images/default-team2.png";
     public long LigaId { get; set; }
-    public int TotalGame { get; set; }
-    public int TotalScore { get; set; }
+    public int TotalGame { get; set; } = 0;
+    public int TotalScore { get; set; } = 0;
 } 

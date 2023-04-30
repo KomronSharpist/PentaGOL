@@ -28,7 +28,7 @@ public class TeamService : ITeamService
     public async Task<TeamForResultDto> CreateAsync(TeamForCreationDto dto)
     {
         var CheckForExits = this.unitOfWork.Teams.SelectAsync(l => l.Name.Equals(dto.Name));
-        if (CheckForExits is not null)
+        if (CheckForExits.Result is not null)
             throw new PentaGolExceptions(409, "Team is already exist");
 
         var mappedDto = this.mapper.Map<Team>(dto);
@@ -61,9 +61,16 @@ public class TeamService : ITeamService
         return this.mapper.Map<List<TeamForResultDto>>(teams);
     }
 
-    public Task<List<TeamForResultDto>> GetAllByLigaIdAsync(PaginationParams @params)
+    public async Task<List<TeamForResultDto>> GetAllByLigaIdAsync(PaginationParams @params, long ligaId)
     {
-        throw new NotImplementedException();
+        var teams = await this.unitOfWork.Teams.SelectAll()
+                 .Where(t => t.LigaId.Equals(ligaId))
+                 .ToPagedList(@params)
+                 .OrderByDescending(t => t.TotalScore)
+                 .ThenByDescending(t => t.TotalGame)
+                 .ToListAsync();
+
+        return this.mapper.Map<List<TeamForResultDto>>(teams);
     }
 
     public async Task<TeamForResultDto> GetByIdAsync(long id)
@@ -75,9 +82,9 @@ public class TeamService : ITeamService
         return this.mapper.Map<TeamForResultDto>(team);
     }
 
-    public async Task<TeamForResultDto> UpdateAsync(TeamForCreationDto dto, long id)
+    public async Task<TeamForResultDto> UpdateAsync(TeamForUpdateDto dto)
     {
-        var CheckForExist = await this.unitOfWork.Teams.SelectAsync(l => l.Id.Equals(id));
+        var CheckForExist = await this.unitOfWork.Teams.SelectAsync(l => l.Id.Equals(dto.Id));
         if (CheckForExist is null)
             throw new PentaGolExceptions(404, "Team for update not found");
 

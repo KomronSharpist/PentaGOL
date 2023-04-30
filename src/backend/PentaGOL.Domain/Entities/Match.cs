@@ -14,7 +14,7 @@ public class Match : Auditable
     public long LigaId { get; set; }
     public long FirstTeamId { get; set; }
     public long SecondTeamId { get; set; }
-    public int FirstTeamScore { get; set; }
-    public int SecondTeamScore { get; set; }
+    public int FirstTeamScore { get; set; } = 0;
+    public int SecondTeamScore { get; set; } = 0; 
     public bool IsEnded { get; set; } = false;
 }

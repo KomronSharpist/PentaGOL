@@ -16,6 +16,5 @@ public class MatchForResultDto
     public long SecondTeamId { get; set; }
     public int FirstTeamScore { get; set; }
     public int SecondTeamScore { get; set; }
-    public MatchStatus Status { get; set; }
     public bool IsEnded { get; set; }
 }

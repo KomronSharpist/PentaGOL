@@ -11,11 +11,13 @@ using PentaGOL.Service.Extensions;
 using PentaGOL.Service.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.SqlServer;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Match = PentaGOL.Domain.Entities.Match;
 
 namespace PentaGOL.Service.Services;
 
@@ -42,11 +44,12 @@ public class MatchService : IMatchService
 
     public async Task<MatchForResultDto> CreateAsync(MatchForCreationDto dto)
     {
-        var CheckForExist = await this.unitOfWork.Matchs.SelectAll().FirstOrDefaultAsync(m => m.FirstTeamId.Equals(dto.FirstTeamId) && m.SecondTeamId.Equals(dto.SecondTeamId) && m.GameDate.Equals(dto.GameDate));
+        var CheckForExist = await this.unitOfWork.Matchs.SelectAsync(m => m.FirstTeamId.Equals(dto.FirstTeamId) && m.SecondTeamId.Equals(dto.SecondTeamId) && m.GameDate.Equals(dto.GameDate) && m.GameDate < dto.GameDate.AddHours(2));
         if (CheckForExist is not null)
             throw new PentaGolExceptions(409, "Match is already exist");
-
-        await this.unitOfWork.Matchs.InsertAsync(CheckForExist);
+        
+        var mappedDto = this.mapper.Map<Match>(dto);
+        await this.unitOfWork.Matchs.InsertAsync(mappedDto);
         await this.unitOfWork.SaveChangesAsync();
 
         return this.mapper.Map<MatchForResultDto>(CheckForExist);
@@ -66,7 +69,7 @@ public class MatchService : IMatchService
 
     public async Task<List<MatchForResultDto>> GetAllAsync(PaginationParams @params)
     {
-        var matchs = await unitOfWork.Ligas.SelectAll()
+        var matchs = await unitOfWork.Matchs.SelectAll()
                .ToPagedList(@params)
                .ToListAsync();
 
@@ -94,36 +97,30 @@ public class MatchService : IMatchService
         return this.mapper.Map<List<MatchForResultDto>>(Match);
     }
 
-    public async Task<List<MatchForResultDto>> GetAllByTime(PaginationParams @params, long ligaId, bool isEnded)
+    public async Task<List<MatchForResultDto>> GetAllByStatus(PaginationParams @params, long ligaId, bool isEnded)
     {
         if (isEnded)
         {
             var OlMatches = await this.unitOfWork.Matchs
             .SelectAll()
-            .Where(t => t.LigaId.Equals(ligaId) && DateTime.ParseExact(t.GameDate
-            .ToString("dd.MM.yyyy HH:mm"), "dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture) < DateTime.Now)
+            .Where(t => t.LigaId.Equals(ligaId) && t.IsEnded == true)
             .ToPagedList(@params)
             .ToListAsync();
-            
 
-            foreach (var match in OlMatches)
-                match.IsEnded = true;
-            
             await this.unitOfWork.SaveChangesAsync();
             return this.mapper.Map<List<MatchForResultDto>>(OlMatches);
         }
         var upCommingMatches = await this.unitOfWork.Matchs
             .SelectAll()
-            .Where(t => t.LigaId.Equals(ligaId) && DateTime.ParseExact(t.GameDate
-            .ToString("dd.MM.yyyy HH:mm"), "dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture) > DateTime.Now)
+            .Where(t => t.LigaId.Equals(ligaId) && t.IsEnded == false)
             .ToPagedList(@params)
             .ToListAsync();
 
         return this.mapper.Map<List<MatchForResultDto>>(upCommingMatches);
     }
-    public async Task<MatchForResultDto> UpdateAsync(MatchForCreationDto dto, long id)
+    public async Task<MatchForResultDto> UpdateAsync(MatchForUpdateDto dto)
     {
-        var CheckForExist = await this.unitOfWork.Matchs.SelectAsync(l => l.Id.Equals(id));
+        var CheckForExist = await this.unitOfWork.Matchs.SelectAsync(l => l.Id.Equals(dto.Id));
         if (CheckForExist is null)
             throw new PentaGolExceptions(404, "Match for update not found");
 
@@ -132,5 +129,21 @@ public class MatchService : IMatchService
         await this.unitOfWork.SaveChangesAsync();
 
         return this.mapper.Map<MatchForResultDto>(mappedDto);
+    }
+
+    public async Task<MatchForResultDto> ChangeStatusAsync(long matchId, MatchForFinishDto dto)
+    {
+        var match = await this.unitOfWork.Matchs.SelectAsync(m => m.Id.Equals(dto.Id));
+        if (match is null)
+            throw new PentaGolExceptions(404, "Match is not found");
+
+        match.UpdatedAt = DateTime.UtcNow;
+        match.FirstTeamScore = dto.FirstTeamScore;
+        match.SecondTeamId = dto.SecondTeamScore;
+        match.IsEnded = true;
+
+        await this.unitOfWork.SaveChangesAsync();
+
+        return this.mapper.Map<MatchForResultDto>(match);
     }
 }

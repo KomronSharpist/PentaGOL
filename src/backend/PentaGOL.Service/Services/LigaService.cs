@@ -69,9 +69,9 @@ public class LigaService : ILigaService
         return this.mapper.Map<LigaForResultDto>(liga);
     }
 
-    public async Task<LigaForResultDto> UpdateAsync(LigaForCreationDto dto, long id)
+    public async Task<LigaForResultDto> UpdateAsync(LigaForUpdateDto dto)
     {
-        var CheckForExist = await this.unitOfWork.Ligas.SelectAsync(l => l.Id.Equals(id));
+        var CheckForExist = await this.unitOfWork.Ligas.SelectAsync(l => l.Id.Equals(dto.Id));
         if (CheckForExist is null)
             throw new PentaGolExceptions(404, "Liga for update not found");
 

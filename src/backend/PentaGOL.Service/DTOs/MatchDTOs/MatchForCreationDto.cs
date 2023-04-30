@@ -19,7 +19,4 @@ public class MatchForCreationDto
     public long FirstTeamId { get; set; }
     [Required]
     public long SecondTeamId { get; set; }
-    public int FirstTeamScore { get; set; } = 0;
-    public int SecondTeamScore { get; set; } = 0;
-    public bool IsEnded { get; set; } = false;
 }

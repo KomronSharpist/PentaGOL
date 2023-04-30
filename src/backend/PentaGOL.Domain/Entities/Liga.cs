@@ -10,5 +10,5 @@ namespace PentaGOL.Domain.Entities;
 public class Liga : Auditable
 {
     public string Name { get; set; }
-    public string ImagePath { get; set; }
+    public string ImagePath { get; set; } = "https://img.freepik.com/premium-vector/football-logo-illustration-vector-design_681672-184.jpg";
 }

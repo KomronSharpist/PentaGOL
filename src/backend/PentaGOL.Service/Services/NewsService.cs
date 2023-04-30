@@ -28,7 +28,7 @@ public class NewsService : INewsService
     public async Task<NewsForResultDto> CreateAsync(NewsForCreationDto dto)
     {
         var CheckForExits = this.unitOfWork.News.SelectAll().FirstOrDefaultAsync(l => l.Title.Equals(dto.Title));
-        if (CheckForExits is not null)
+        if (CheckForExits.Result is not null)
             throw new PentaGolExceptions(409, "News is already exist");
 
         var mappedDto = this.mapper.Map<News>(dto);
@@ -71,9 +71,9 @@ public class NewsService : INewsService
         return this.mapper.Map<NewsForResultDto>(liga);
     }
 
-    public async Task<NewsForResultDto> UpdateAsync(NewsForCreationDto dto, long id)
+    public async Task<NewsForResultDto> UpdateAsync(NewsForUpdateDto dto)
     {
-        var CheckForExist = await this.unitOfWork.News.SelectAsync(l => l.Id.Equals(id));
+        var CheckForExist = await this.unitOfWork.News.SelectAsync(l => l.Id.Equals(dto.Id));
         if (CheckForExist is null)
             throw new PentaGolExceptions(404, "News for update not found");
 
