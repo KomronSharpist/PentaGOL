@@ -14,8 +14,8 @@ function App() {
     <>
       <Header></Header>
       <Routes>
-        <Route path="/" element={<Home/>}> </Route>
-        <Route path="/article" element={<Article/>}/>
+        <Route path="/" element={<Home></Home>}> </Route>
+        <Route path="/article/:id" element={<Article></Article>}/>
         <Route path="/admin" element={<Admin/>}/>
         <Route path="/admin/news" element={<AdminNews/>}/>
         <Route path="/admin/teams" element={<AdminTeams/>}/>

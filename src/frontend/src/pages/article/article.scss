@@ -1,0 +1,15 @@
+.article_box {
+  > p {
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 30px;
+    color: var(---arrtext);
+  }
+  >h2{
+font-weight: 700;
+font-size: 30px;
+line-height: 49px;
+color: var(---text);
+width: 1000px;
+  }
+}
