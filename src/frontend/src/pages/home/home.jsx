@@ -9,6 +9,40 @@ export const Home = () => {
   const [state, setState] = React.useState("a");
   const [state1, setState1] = React.useState("bb");
   const [click, setclick] = React.useState(true);
+  const [liga, setliga] = React.useState("");
+  const [img, setimg] = React.useState("");
+  React.useEffect(() => {
+    fetch(
+      "https://dabe-89-236-218-41.ngrok-free.app/api/Liga?PageSize=10&PageIndex=1",
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "true",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setliga(data);
+      });
+  }, []);
+
+  React.useEffect(() => {
+    fetch(
+      "https://f096-89-236-218-41.ngrok-free.app/api/News?PageSize=10&PageIndex=1",
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "true",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setimg(data);
+      });
+  }, []);
+
+  console.log(liga ? liga.map((el) => el.id) : "");
+  console.log(img);
   return (
     <main>
       <div className="main container">
@@ -28,8 +62,8 @@ export const Home = () => {
                 }
                 onClick={() => setState("a")}
               >
-                <img src={teamLogo} alt={teamLogo} />
-                Italiya. Seriya A
+                <img src={liga[0]?.imagePath} alt={liga[0]?.imagePath} />
+                {liga[0]?.name}
               </button>
               <button
                 style={
@@ -44,8 +78,8 @@ export const Home = () => {
                 }
                 onClick={() => setState("b")}
               >
-                <img src={teamLogo} alt={teamLogo} />
-                Italiya. Seriya A2
+                <img src={liga[1]?.imagePath} alt={liga[0]?.imagePath} />
+                {liga[1]?.name}
               </button>
               <button
                 style={
@@ -60,8 +94,8 @@ export const Home = () => {
                 }
                 onClick={() => setState("c")}
               >
-                <img src={teamLogo} alt={teamLogo} />
-                Italiya. Seriya A3
+                <img src={liga[2]?.imagePath} alt={liga[0]?.imagePath} />
+                {liga[2]?.name}
               </button>
               <button
                 style={
@@ -76,8 +110,8 @@ export const Home = () => {
                 }
                 onClick={() => setState("d")}
               >
-                <img src={teamLogo} alt={teamLogo} />
-                Italiya. Seriya A4
+                <img src={liga[3]?.imagePath} alt={liga[0]?.imagePath} />
+                {liga[3]?.name}
               </button>
               <button
                 style={
@@ -92,8 +126,8 @@ export const Home = () => {
                 }
                 onClick={() => setState("v")}
               >
-                <img src={teamLogo} alt={teamLogo} />
-                Italiya. Seriya A5
+                <img src={liga[4]?.imagePath} alt={liga[0]?.imagePath} />
+                {liga[4]?.name}
               </button>
             </div>
             <div>
@@ -897,17 +931,38 @@ export const Home = () => {
         <section>
           <div className="middle">
             <div className="imgs_box">
-              <Link to={"article/{data.id}"}>
-                <div className="middle_main">
-                  <h1>
-                    Faqatgina muvaffaqiyatli qur'a Rossiyani Jahon chempionatiga
-                    olib boradi: bo'g'inlar oldidagi barcha maketlar
-                  </h1>
-                  <p>2 soat oldin</p>
-                </div>
-              </Link>
+              {img ? (
+                <Link to={"article/{data.id}"}>
+                  <div
+                    style={{ backgroundColor: img[0].imagePath }}
+                    className="middle_main"
+                  >
+                    <h1>{img[0].title}</h1>
+                    <p>{img[0].description}</p>
+                  </div>
+                </Link>
+              ) : (
+                ""
+              )}
+
               <div className="box_imgs">
-                <div className="nextimg">
+                {img
+                  ? img.map((el, i) =>
+                      i > 0 ? (
+                        <div
+                          style={{ backgroundColor: el.imagePath }}
+                          className="nextimg"
+                        >
+                          <h3>{el.title}</h3>
+                          <p>{el.description}</p>
+                        </div>
+                      ) : (
+                        ""
+                      )
+                    )
+                  : ""}
+
+                {/* <div className="nextimg">
                   <h3>
                     Messi Goal.com saytida yilning eng yaxshi futbolchisi deb
                     topildi
@@ -948,7 +1003,7 @@ export const Home = () => {
                     topildi
                   </h3>
                   <p>2 soat oldin</p>
-                </div>
+                </div> */}
               </div>
             </div>
 
@@ -1260,21 +1315,15 @@ export const Home = () => {
                 </p>
                 <p className="data_news">12.05.2021 12:54</p>
               </li>
-
-
             </ul>
 
-            <div className="allsee">
-            Barchasi ko’rish
-            </div>
+            <div className="allsee">Barchasi ko’rish</div>
           </div>
 
           <div className="news">
             <div className="news_title">Barcha yangiliklar</div>
 
             <ul className="news_content_wrap">
- 
-
               <li>
                 <img src={news} alt={news} />
                 <h2>
@@ -1378,13 +1427,9 @@ export const Home = () => {
                 </p>
                 <p className="data_news">12.05.2021 12:54</p>
               </li>
-
-
             </ul>
 
-            <div className="allsee">
-            Barchasi ko’rish
-            </div>
+            <div className="allsee">Barchasi ko’rish</div>
           </div>
         </section>
       </div>

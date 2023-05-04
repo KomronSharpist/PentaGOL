@@ -8,11 +8,11 @@ export const Article = () => {
  
 <div className="container">
   <div className="article_box">
-    <p>2 soat oldin</p>
+    <p className="two">2 soat oldin</p>
     <h2>Faqatgina muvaffaqiyatli qur'a Rossiyani Jahon chempionatiga olib boradi: bo'g'inlar oldidagi barcha maketlar</h2>
 
     <div className="article_content">
-      <div>
+      <div className="ert">
       <img src={img} alt={img} />
       <p>Ilon Mask (Elon Mask, Tesla va boshqa loyihalar rahbari) bir yarim hafta ichida ikkinchi marta Xitoyning hukmron doiralari va fuqarolariga murojaat qildi. Videoda u ularni ushbu mamlakatda biznesni rivojlantirish va kengaytirishga sarmoya kiritishga tayyor ekanligiga ishontirdi. Qayta ishlangan ma'lumotlarning xavfsizligiga alohida e'tibor qaratiladi.
 <br />
@@ -27,8 +27,42 @@ Yaqin kelajakda Tesla nafaqat Shanxay filialida elektromobillar ishlab chiqarish
 
   Xitoy Xalq Respublikasida yig‘ilgan Tesla Model Y va Model 3 elektromobillari allaqachon Yevropaga eksport qilinmoqda.</p>
       </div>
-<div>
-  Asosiy
+
+
+<div className="basic">
+<h2>Asosiy</h2>
+<div className="basic_cont">
+  <h3>Messi Goal.com saytida yilning eng yaxshi futbolchisi deb topildi</h3>
+  <p>12.05.2021  12:54</p>
+</div>
+
+
+
+
+<div className="basic_cont">
+  <h3>Messi Goal.com saytida yilning eng yaxshi futbolchisi deb topildi</h3>
+  <p>12.05.2021  12:54</p>
+</div>
+
+<div className="basic_cont">
+  <h3>Messi Goal.com saytida yilning eng yaxshi futbolchisi deb topildi</h3>
+  <p>12.05.2021  12:54</p>
+</div>
+
+<div className="basic_cont">
+  <h3>Messi Goal.com saytida yilning eng yaxshi futbolchisi deb topildi</h3>
+  <p>12.05.2021  12:54</p>
+</div>
+
+<div className="basic_cont">
+  <h3>Messi Goal.com saytida yilning eng yaxshi futbolchisi deb topildi</h3>
+  <p>12.05.2021  12:54</p>
+</div>
+
+<div className="basic_cont">
+  <h3>Messi Goal.com saytida yilning eng yaxshi futbolchisi deb topildi</h3>
+  <p>12.05.2021  12:54</p>
+</div>
 </div>
 
     </div>

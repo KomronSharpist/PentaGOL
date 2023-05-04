@@ -13,3 +13,63 @@ color: var(---text);
 width: 1000px;
   }
 }
+
+
+.space{
+  background-color: red;
+}
+
+.form_input{
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  gap: 10px;
+  >input{
+width: 400px;
+height: 100px;
+  }
+}
+
+.butons{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  margin: 0 auto;
+}
+
+
+.basic{
+  background: var(---basic);
+border-radius: 10px;
+width:350px ;
+display: flex;
+flex-direction: column;
+gap: 30px;
+padding: 10px;
+
+>h2{
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+}
+>p{
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: right;
+  color: var(---arrtext);
+  
+}
+}
+
+.article_content{
+  display: flex;
+  justify-content: space-between;
+}
+.ert{
+  width: 73%;
+  >img{
+    width: 100%;
+  }
+}
