@@ -62,6 +62,10 @@
   margin-top: -5px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
+  >div>img{
+    width: 25px;
+    height: 25px;
+  }
 }
 
 .match_wrap {
@@ -304,4 +308,12 @@
 }
 .allsee:hover{
   background-color:  #469264;;
+}
+
+.btn_box{
+  >button>img{
+    width: 25px;
+    height: 25px;
+
+  }
 }
